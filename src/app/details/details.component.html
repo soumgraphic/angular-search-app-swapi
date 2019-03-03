@@ -1,0 +1,54 @@
+<p>
+  Détails de l'épisode {{episode_id}}
+</p>
+<!-- la balise a avec routerlink et le path pour mettre les href en angular d'une page à une autre -->
+<a [routerLink]="['/recherche']">Retour à la recherche</a>
+
+<p class="alert alert-primary" role="alert" *ngIf="erreur === '' && loading">Chargement des données du film {{episode_id}} en cours...</p>
+
+<ul *ngIf="!loading && erreur === ''" class="list-group">
+  <li class="list-group-item list-group-item-action">
+    #{{filmsDetails.producer}}
+  </li>
+  <li class="list-group-item list-group-item-action">
+    #{{filmsDetails.director}}
+  </li>
+  <li class="list-group-item list-group-item-action">
+    <!-- On utilise la directive date pour mieux formater notre date
+         et le format souhaiter, que la date soit de format date ou string il peut le faire de façon
+         propre.
+    -->
+     #{{filmsDetails.created | date:'dd/MM/yyyy à h:mm:ss'}}
+    <!--#{{filmsDetails.created | dateTimeFormat}}  A tester pourquoi sa ne marche pas -->
+  </li>
+  <li class="list-group-item list-group-item-action">
+    #{{filmsDetails.opening_crawl}}
+  </li>
+  <li class="list-group-item list-group-item-action">
+    #{{filmsDetails.edited | date:'dd/MM/yyyy à h:mm:ss'}}
+  </li>
+  <li class="list-group-item list-group-item-action">
+    #{{filmsDetails.title}}
+  </li>
+  <li class="list-group-item list-group-item-action">
+    #{{filmsDetails.release_date}}
+  </li>
+  <li class="list-group-item list-group-item-action">
+    PLANETS
+  </li>
+  <li *ngFor="let planet of filmsDetails.planets" class="list-group-item list-group-item-action">
+    #{{planet}}
+  </li>
+  <li class="list-group-item list-group-item-action">
+    VEHICLES
+  </li>
+  <!--
+      Ici vehicles n'a pas été définis dans les films détails comme la planète, si vehicles avait des attributs nommer à l'intérieur
+      J'allais pouvoir récupérer ses informations avec veh.nom_attr
+  -->
+  <li *ngFor="let veh of filmsDetails.vehicles" class="list-group-item list-group-item-action">
+    #{{veh}}
+  </li>
+
+
+</ul>

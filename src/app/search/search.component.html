@@ -1,0 +1,28 @@
+<h4 class="mt-3">Recherche de films starwars</h4>
+<div>
+    <input type="text" class="form-control" placeholder="Quel film cherchez vous ?" [(ngModel)]="recherche"/>
+    <button (click)="rechercherFilm()" class="btn btn-primary mt-3">Rechercher</button>
+    <button (click)="toutRechercher()" class="btn btn-primary mt-3 ml-2">Tout afficher</button>
+</div>
+<div>
+    <h5 class="mt-5 mb-3">Nombre de résultats {{films.length}}</h5>
+    <!-- ngIf conditionne l'affichage de l'erreur si seulement la variable erreur n'est pas vide -->
+    <p *ngIf="erreur !== ''" class="alert alert-danger">Erreur : {{erreur}} </p>
+    <p class="alert alert-primary" role="alert" *ngIf="erreur === '' && loading">Chargement en cours...</p>
+    <!-- Si le chargement n'est pas en cours et qu'il n'ya pas d'erreur et que la recherche n'est pas null.
+         Si la taille du film est 0 on affiche aucun film trouvé -->
+    <div *ngIf="!loading && erreur === '' ">
+        <!-- <p *ngIf="filmNotFound === true">Aucun film correspondant à votre recherche</p> -->
+        <p *ngIf="films.length < 1 && filmNotFound === true">Aucun film correspondant à votre recherche</p>
+    </div>
+    <ul *ngIf="!loading && erreur === ''" class="list-group">
+        <li *ngFor="let film of films " class="list-group-item list-group-item-action">
+            #{{film.episode_id}}
+            <!-- la balise a avec routerlink et le path pour mettre les href en angular d'une page à une autre -->
+            <!-- avec en plus l'episode id du film cliqué pour voir ses détails, c'est la var film definis avec let -->
+            <a [routerLink]="['/details', film.episode_id]">{{film.title}}</a>
+            {{film.director}}
+        </li>
+    </ul>
+
+</div>

@@ -1,0 +1,11 @@
+<h1 *ngIf="display && 1+1 === 2">
+    <!-- Appel du booleen display pour afficher le texte Hello world, deux conditions si display est true et 1+1 = 2, il affiche le texte-->
+    Hello world !
+</h1>
+<button (click)="afficher()">
+    Clique sur moi !
+</button> <!-- Appel de la méthode afficher dans le my-component.component.ts lors du clique sur le button -->
+<ul>
+    <li *ngFor="let item of list">{{item}}</li>
+    <!-- Affichage de la liste prédéfinis list présente dans my-component.component.ts à travers la variable item qui est chaque element de la liste -->
+</ul>
